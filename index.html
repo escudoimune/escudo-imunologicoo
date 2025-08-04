@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Seu Filho Está REALMENTE Protegido?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff8f6;
+    }
+    
+    .option-radio:checked + .option-label {
+      border-color: #ef4444;
+      background-color: #fee2e2;
+      box-shadow: 0 0 0 2px #fee2e2;
+    }
+    
+    .progress-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #e5e7eb;
+    }
+    
+    .progress-dot.active {
+      background-color: #10b981;
+    }
+    
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen py-8">
+  <div class="container mx-auto px-4 max-w-2xl">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="inline-block bg-red-100 rounded-full p-3 mb-4">
+        <i class="fas fa-shield-alt text-red-500 text-3xl"></i>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
+        Seu Filho Está <span class="text-red-600">REALMENTE</span> Protegido?
+      </h1>
+      <p class="text-gray-600">Responda este rápido quiz e descubra como fortalecer a imunidade do seu filho</p>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="flex justify-center items-center gap-2 mb-8">
+      <div class="progress-dot active"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+    </div>
+    
+    <!-- Quiz Container -->
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300">
+      <!-- Question 1 (Active) -->
+      <div class="question p-6" id="question-1">
+        <div class="flex items-center text-sm font-medium text-green-600 mb-4">
+          <i class="fas fa-circle-check mr-2"></i>
+          <span>Pergunta 1 de 5</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          Nos últimos 30 dias, quantas vezes seu filho ficou doente?
+        </h2>
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="q1" value="Nenhuma" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Nenhuma</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q1" value="1 ou 2 vezes" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>1 ou 2 vezes</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q1" value="3 vezes ou mais" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>3 vezes ou mais</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q1" value="Já perdi a conta… 😔" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Já perdi a conta… <span class="text-gray-500">😔</span></span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <button onclick="nextQuestion(1)" class="mt-6 w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center pulse-animation">
+          Próxima Pergunta <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+      
+      <!-- Question 2 (Hidden) -->
+      <div class="question p-6 hidden" id="question-2">
+        <div class="flex items-center text-sm font-medium text-green-600 mb-4">
+          <i class="fas fa-circle-check mr-2"></i>
+          <span>Pergunta 2 de 5</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          Como você se sente quando vê seu filho doente de novo?
+        </h2>
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="q2" value="Triste, mas já virou rotina" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Triste, mas já virou rotina</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q2" value="Culpada… sinto que falhei com ele" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Culpada… sinto que falhei com ele</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q2" value="Sozinha e sem saída" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Sozinha e sem saída</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q2" value="Confiante. Eu sei o que fazer" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Confiante. Eu sei o que fazer</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button onclick="prevQuestion(2)" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+          </button>
+          <button onclick="nextQuestion(2)" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            Próxima <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Question 3 (Hidden) -->
+      <div class="question p-6 hidden" id="question-3">
+        <div class="flex items-center text-sm font-medium text-green-600 mb-4">
+          <i class="fas fa-circle-check mr-2"></i>
+          <span>Pergunta 3 de 5</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          O que você costuma fazer quando ele adoece?
+        </h2>
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="q3" value="Dou antibiótico e torço pra passar" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Dou antibiótico e torço pra passar</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q3" value="Faço chá, rezo e espero melhorar" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Faço chá, rezo e espero melhorar</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q3" value="Levo no médico, mas me sinto perdida" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Levo no médico, mas me sinto perdida</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q3" value="Sigo uma rotina de prevenção todos os dias" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Sigo uma rotina de prevenção todos os dias</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button onclick="prevQuestion(3)" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+          </button>
+          <button onclick="nextQuestion(3)" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            Próxima <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Question 4 (Hidden) -->
+      <div class="question p-6 hidden" id="question-4">
+        <div class="flex items-center text-sm font-medium text-green-600 mb-4">
+          <i class="fas fa-circle-check mr-2"></i>
+          <span>Pergunta 4 de 5</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          Você acredita que é possível blindar seu filho contra doenças sem depender só de remédios?
+        </h2>
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="q4" value="Sim, mas não sei por onde começar" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Sim, mas não sei por onde começar</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q4" value="Já tentei, mas não funcionou" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Já tentei, mas não funcionou</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q4" value="Não confio muito nisso" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Não confio muito nisso</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q4" value="SIM! Quero aprender agora" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>SIM! Quero aprender agora</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button onclick="prevQuestion(4)" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+          </button>
+          <button onclick="nextQuestion(4)" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            Próxima <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Question 5 (Hidden) -->
+      <div class="question p-6 hidden" id="question-5">
+        <div class="flex items-center text-sm font-medium text-green-600 mb-4">
+          <i class="fas fa-circle-check mr-2"></i>
+          <span>Última Pergunta</span>
+        </div>
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+          Se existisse um plano simples de 7 dias, com passos claros pra fortalecer a imunidade do seu filho em casa… você começaria hoje?
+        </h2>
+        <div class="space-y-3">
+          <label class="block">
+            <input type="radio" name="q5" value="Com certeza!" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Com certeza!</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q5" value="Talvez… preciso entender melhor" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Talvez… preciso entender melhor</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q5" value="Tenho dúvidas, mas quero saber mais" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Tenho dúvidas, mas quero saber mais</span>
+              </div>
+            </div>
+          </label>
+          <label class="block">
+            <input type="radio" name="q5" value="Não sei se é pra mim" class="hidden option-radio">
+            <div class="option-label p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all hover:border-red-300">
+              <div class="flex items-center">
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></div>
+                <span>Não sei se é pra mim</span>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button onclick="prevQuestion(5)" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center">
+            <i class="fas fa-arrow-left mr-2"></i> Voltar
+          </button>
+          <button onclick="showResults()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all flex items-center justify-center pulse-animation">
+            Ver Resultado <i class="fas fa-lock ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Testimonials -->
+    <div class="mt-12 text-center">
+      <h3 class="text-lg font-medium text-gray-700 mb-6">O que outras mães estão dizendo:</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white p-5 rounded-lg shadow-md">
+          <div class="flex items-center justify-center text-yellow-400 mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-600 italic mb-3">"Meu filho não fica mais doente toda semana! Finalmente encontrei a solução."</p>
+          <p class="text-sm text-gray-500">- Ana, mãe do Pedro (3 anos)</p>
+        </div>
+        <div class="bg-white p-5 rounded-lg shadow-md">
+          <div class="flex items-center justify-center text-yellow-400 mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-600 italic mb-3">"Simples e eficaz. Em 2 semanas já vi diferença na saúde da minha filha."</p>
+          <p class="text-sm text-gray-500">- Carla, mãe da Sofia (5 anos)</p>
+        </div>
+        <div class="bg-white p-5 rounded-lg shadow-md">
+          <div class="flex items-center justify-center text-yellow-400 mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-600 italic mb-3">"Não preciso mais correr para o médico toda semana. Alívio indescritível!"</p>
+          <p class="text-sm text-gray-500">- Mariana, mãe do Lucas (4 anos)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Navigation between questions
+    function nextQuestion(current) {
+      const currentQuestion = document.getElementById(`question-${current}`);
+      const nextQuestion = document.getElementById(`question-${current + 1}`);
+      
+      // Validate if an option was selected
+      const selectedOption = currentQuestion.querySelector('input[type="radio"]:checked');
+      if (!selectedOption) {
+        alert('Por favor, selecione uma opção antes de continuar.');
+        return;
+      }
+      
+      // Update progress dots
+      const dots = document.querySelectorAll('.progress-dot');
+      dots[current].classList.add('active');
+      
+      // Hide current and show next
+      currentQuestion.classList.add('hidden');
+      nextQuestion.classList.remove('hidden');
+      
+      // Scroll to top of question
+      window.scrollTo({
+        top: nextQuestion.offsetTop - 100,
+        behavior: 'smooth'
+      });
+    }
+    
+    function prevQuestion(current) {
+      const currentQuestion = document.getElementById(`question-${current}`);
+      const prevQuestion = document.getElementById(`question-${current - 1}`);
+      
+      // Hide current and show previous
+      currentQuestion.classList.add('hidden');
+      prevQuestion.classList.remove('hidden');
+      
+      // Scroll to top of question
+      window.scrollTo({
+        top: prevQuestion.offsetTop - 100,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Show results and redirect
+    function showResults() {
+      // Validate if an option was selected
+      const selectedOption = document.querySelector('#question-5 input[type="radio"]:checked');
+      if (!selectedOption) {
+        alert('Por favor, selecione uma opção antes de ver seu resultado.');
+        return;
+      }
+      
+      // Capture all answers
+      const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+      const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+      const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+      const q4 = document.querySelector('input[name="q4"]:checked')?.value;
+      const q5 = document.querySelector('input[name="q5"]:checked')?.value;
+      
+      // Determine result type
+      let resultType = '';
+      let resultMessage = '';
+      
+      if (q1 === "Já perdi a conta… 😔" || q2 === "Sozinha e sem saída" || q3 === "Levo no médico, mas me sinto perdida") {
+        resultType = "Mãe Perdida";
+        resultMessage = "Você está se sentindo sobrecarregada e sem saber o que fazer quando seu filho fica doente. Mas há esperança! Nosso método pode te guiar passo a passo para fortalecer a imunidade do seu filho de forma natural.";
+      } 
+      else if (q2 === "Culpada… sinto que falhei com ele" || q3 === "Dou antibiótico e torço pra passar") {
+        resultType = "Mãe que Tenta Tudo";
+        resultMessage = "Você já está fazendo o seu melhor, mas sente que falta algo. Nosso plano vai te mostrar como complementar os cuidados médicos com estratégias naturais para reduzir as doenças do seu filho.";
+      } 
+      else if (q4 === "Não confio muito nisso") {
+        resultType = "Mãe Cética";
+        resultMessage = "Você tem dúvidas sobre métodos naturais, e isso é compreensível. Mas nossos resultados falam por si. Dê uma chance para conhecer nosso método baseado em evidências científicas.";
+      } 
+      else {
+        resultType = "Mãe Confiante";
+        resultMessage = "Você já está no caminho certo! Com o nosso método, você pode levar a saúde do seu filho para o próximo nível, com estratégias comprovadas para fortalecer ainda mais sua imunidade.";
+      }
+      
+      // Create a modal with the result
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+      modal.innerHTML = `
+        <div class="bg-white rounded-xl p-6 max-w-md w-full animate-fade-in">
+          <div class="text-center mb-6">
+            <div class="inline-block bg-red-100 rounded-full p-4 mb-3">
+              <i class="fas fa-shield-alt text-red-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Seu Resultado: ${resultType}</h3>
+            <p class="text-gray-600">${resultMessage}</p>
+          </div>
+          <div class="bg-red-50 p-4 rounded-lg mb-6">
+            <p class="text-red-600 font-medium text-center">Você está a apenas um passo de descobrir como fortalecer a imunidade do seu filho!</p>
+          </div>
+          <button onclick="redirectToOffer()" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-lg transition-all">
+            Quero Conhecer o Método <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+    }
+    
+    function redirectToOffer() {
+      window.location.href = 'https://escudoimune.github.io/escudo-imunologico/';
+    }
+    
+    // Add animation class when radio is checked
+    document.querySelectorAll('.option-radio').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const label = this.nextElementSibling;
+        label.classList.add('animate-pulse-once');
+        
+        // Remove animation class after it completes
+        setTimeout(() => {
+          label.classList.remove('animate-pulse-once');
+        }, 500);
+      });
+    });
+  </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=v4sp3r/quiz" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
